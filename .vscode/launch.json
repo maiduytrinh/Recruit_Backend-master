@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SpotifyBackendApplication<spotify-backend>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.spotify.SpotifyBackendApplication",
+            "projectName": "spotify-backend",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-SpotifyBackendApplication<spotify-backend>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.app.SpotifyBackendApplication",
+            "projectName": "spotify-backend",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
