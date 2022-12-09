@@ -35,9 +35,9 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserResponseType loadUserByEmail(String email) {
         // TODO Auto-generated method stub
-        Optional<Users> user= userRepository.loadUser(email);
-        if (user.isPresent()){
-            return userConverter.ConvertToAll(user.get());
+        Users user= userRepository.loadUser(email);
+        if (user != null){
+            return userConverter.ConvertToDTO(user);
             
         }
         throw new NotFoundEntityException(Constraints.VALIDATE_NOT_FOUND);

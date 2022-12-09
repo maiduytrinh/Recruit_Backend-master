@@ -29,7 +29,7 @@ public class Users {
     private String urlImg;
     @Column(name = "uuid")
     private String uuid;
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
     @Column(name = "passsword")
     private String passsword;
