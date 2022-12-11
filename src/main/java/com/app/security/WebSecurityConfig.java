@@ -59,8 +59,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                     .disable()
                 .authorizeRequests()
-                    .antMatchers("/api/users/login").permitAll()// Cho phép tất cả mọi người truy cập vào 2 địa chỉ này
-                    .anyRequest().authenticated(); // Tất cả các request khác đều cần phải xác thực mới được truy cập
+                    .antMatchers("/api/users/login").permitAll();// Cho phép tất cả mọi người truy cập vào 2 địa chỉ này
+                    // .anyRequest().authenticated(); // Tất cả các request khác đều cần phải xác thực mới được truy cập
 
         // Thêm một lớp Filter kiểm tra jwt
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
