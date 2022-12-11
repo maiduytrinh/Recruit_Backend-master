@@ -21,7 +21,6 @@ public class ProfileConverter {
         response.setHobby(profile.getHobby());
         response.setHomeId(profile.getHomeId());
         response.setId(profile.getId());
-        response.setJobInformation(profile.getJobInformation());
         response.setPersonality(profile.getPersonality());
         response.setPhone(profile.getPhone());
         response.setSalary(profile.getSalary());

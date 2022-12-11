@@ -19,6 +19,8 @@ public class UserConverter {
     ListJobConverter listJobConverter;
     @Autowired
     RoleConverter roleConverter;
+    @Autowired
+    JobConverter jobConverter;
     
 
     public UserResponseType ConvertToBasic(Users users){
@@ -32,6 +34,9 @@ public class UserConverter {
         response.setUrlImg(users.getUrlImg());
         if(null != users.getRoles()){
             response.setRoles(roleConverter.ConvertToDTO(users.getRoles()));
+        }
+        if(null != users.getJob()){
+            response.setJob(jobConverter.ConvertToDTO(users.getJob()));
         }
         return response;
     }
@@ -51,6 +56,9 @@ public class UserConverter {
         if(null != users.getRoles()){
             response.setRoles(roleConverter.ConvertToDTO(users.getRoles()));
         }
+        if(null != users.getJob()){
+            response.setJob(jobConverter.ConvertToDTO(users.getJob()));
+        }
         return response;
     }
 
@@ -69,12 +77,16 @@ public class UserConverter {
         if(null != users.getRoles()){
             response.setRoles(roleConverter.ConvertToDTO(users.getRoles()));
         }
+        if(null != users.getJob()){
+            response.setJob(jobConverter.ConvertToDTO(users.getJob()));
+        }
         List<ListProfileResponseType> listProfileResponseTypes = new ArrayList<>();
         List<ListProfiles> listProfiles = users.getListJobs();
         if(null != listProfiles){
             listProfiles.forEach(item -> {
                  ListProfileResponseType listProfileResponseType = new ListProfileResponseType();
                  listProfileResponseType.setJobs(listJobConverter.ConvertToDTO(item.getListProfileId().getJobs()));
+                 listProfileResponseType.setStatus(item.getStatus());
                  listProfileResponseTypes.add(listProfileResponseType);
             });
         }
@@ -96,6 +108,9 @@ public class UserConverter {
         users.setPasssword(userResponseType.getPasssword());
         if(null != userResponseType.getProfile()){
             users.setProfile(profileConverter.convertToEntity(userResponseType.getProfile()));
+        }
+        if(null != userResponseType.getJob()){
+            users.setJob(jobConverter.ConvertToEntity(userResponseType.getJob()));
         }
         // if(null != users.getRoles()){
         //     users.setRoles(roleConverter.con(users.getRoles()));

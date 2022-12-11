@@ -1,5 +1,7 @@
 package com.app.service.impl;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,32 +15,42 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.app.dto.converter.JobConverter;
 import com.app.dto.converter.ListJobConverter;
+import com.app.dto.request.ListJobRequest;
 import com.app.dto.request.PaginationRequest;
+import com.app.dto.response.JobResponseType;
 import com.app.dto.response.ListJobResponseType;
+import com.app.entities.Job;
 import com.app.entities.ListJobs;
 import com.app.exception.NotFoundEntityException;
+import com.app.repository.JobRepository;
 import com.app.repository.ListJobRepository;
 import com.app.service.ListJobService;
 import com.app.ultils.Constraints;
 
 @Service
 public class ListJobServiceImpl implements ListJobService{
-    private final ListJobConverter listJobConverter;
-    private final ListJobRepository listJobRepository;
     @Autowired
-    public ListJobServiceImpl(ListJobConverter listJobConverter, ListJobRepository listJobRepository){
-        this.listJobConverter = listJobConverter;
-        this.listJobRepository = listJobRepository;
-    }
+    ListJobConverter listJobConverter;
+
+    @Autowired
+    ListJobRepository listJobRepository;
+
+    @Autowired
+    JobRepository jobRepository;
 
     @Override
     public ListJobResponseType save(ListJobResponseType listJobResponseType) throws Exception {
         // TODO Auto-generated method stub
         ListJobResponseType response = null;
-        ListJobs job = listJobConverter.ConvertoEntity(listJobResponseType);
-        ListJobs jobSave = listJobRepository.save(job);
+        ListJobs listJobs = listJobConverter.ConvertoEntity(listJobResponseType);
+        listJobs.setStatus(1);
+        listJobs.setDateCreated(LocalDate.now());
+        ListJobs jobSave = listJobRepository.save(listJobs);
         if (null != jobSave) {
+            Job job = jobRepository.getById(listJobResponseType.getJob().getId());
+            jobRepository.UpdateCountJob(job.getCountJob() + 1, job.getId());
             response = listJobConverter.ConvertToDTO(jobSave);
         }
         return response;
@@ -63,6 +75,7 @@ public class ListJobServiceImpl implements ListJobService{
             job.setSalary(jobUpdate.getSalary());
             job.setSex(jobUpdate.getSex());
             job.setWorkAddress(jobUpdate.getWorkAddress());
+            job.setDateExpiration(jobUpdate.getDateExpiration());
             if(null != jobUpdate.getJob()){
                 job.setJob(jobUpdate.getJob());
             }
@@ -89,6 +102,8 @@ public class ListJobServiceImpl implements ListJobService{
         Optional<ListJobs> jobOptional = listJobRepository.findById(id);
         if (jobOptional.isPresent()) {
             listJobRepository.deleteById(id);
+            Job job = jobRepository.getById(jobOptional.get().getJob().getId());
+            jobRepository.UpdateCountJob(job.getCountJob() - 1, job.getId());
             return true;
         }
         throw new NotFoundEntityException(Constraints.VALIDATE_NOT_FOUND);
@@ -117,5 +132,28 @@ public class ListJobServiceImpl implements ListJobService{
         return result;
     }
 
-    
+    @Override
+    public List<ListJobResponseType> getJobs(ListJobRequest listJobRequest) {
+        // TODO Auto-generated method stub
+        List<ListJobResponseType> listJobResponseTypes = new ArrayList<>();
+        List<ListJobs> listJobs;
+        if(listJobRequest.getCodeAddress() != null)
+            listJobs = listJobRepository.getListJobByCodeAddress(listJobRequest.getCodeAddress());
+        else if(listJobRequest.getIdJob() != null)
+            listJobs = listJobRepository.getListJobByIdJob(listJobRequest.getIdJob());
+        else if(listJobRequest.getDateStart() != null && listJobRequest.getDateEnd() != null)
+            listJobs = listJobRepository.fillterDate(listJobRequest.getDateStart(), listJobRequest.getDateEnd());
+        else if(listJobRequest.getSalaryStart() != null && listJobRequest.getSalaryEnd() != null)
+            listJobs = listJobRepository.fillterSalary(listJobRequest.getSalaryStart(), listJobRequest.getSalaryEnd());
+        else
+            listJobs = listJobRepository.getListJobNew();
+
+        if(null != listJobs){
+            listJobs.forEach(item -> {
+                ListJobResponseType listJobResponseType = listJobConverter.ConvertToBasic(item);
+                listJobResponseTypes.add(listJobResponseType);
+            });
+        }
+        return listJobResponseTypes;
+    }    
 }

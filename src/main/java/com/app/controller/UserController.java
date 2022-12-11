@@ -1,10 +1,10 @@
 package com.app.controller;
 
+import com.app.dto.request.LoginRequest;
 import com.app.dto.response.LoginResponseType;
 import com.app.dto.response.UserResponseType;
 import com.app.security.CustomUserDetails;
 import com.app.security.JwtTokenProvider;
-import com.app.security.LoginRequest;
 import com.app.service.UserService;
 import com.app.service.impl.FileStorageServiceImpl;
 import com.app.ultils.Utils;
@@ -79,11 +79,11 @@ public class UserController {
         return pResponse;
     }
 
-    // @GetMapping("/{email}")
-    // public ResponseEntity<UserResponseType> findByEmail(@PathVariable("email") String email) throws JsonProcessingException {
-    //     ResponseEntity<UserResponseType> pResponse = new ResponseEntity<>(userService.loadUserByEmail(email), HttpStatus.OK);
-    //     return pResponse;
-    // }
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResponseType> findById(@PathVariable("id") Integer id) throws JsonProcessingException {
+        ResponseEntity<UserResponseType> pResponse = new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
+        return pResponse;
+    }
 
     @PostMapping("/update/{id}")
     public ResponseEntity<UserResponseType> update( @RequestParam("user") String userJson,

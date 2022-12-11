@@ -14,7 +14,7 @@ public interface ListProfileReponsitory extends JpaRepository<ListProfiles, Inte
     @Query(value = "DELETE FROM ListProfiles WHERE listProfileId.users.id =:userId and listProfileId.jobs.id =:jobId")
     @Modifying
     int DelListProfile(int userId, int jobId);
-    @Query(value = "INSERT INTO `recruit`.`list_profile` (`user_id`, `list_job_id`) VALUES (:playlistId, :songId)", nativeQuery = true)
+    @Query(value = "INSERT INTO `recruit`.`list_profile` (`user_id`, `list_job_id`, `status`) VALUES (:userId, :jobId, 1)", nativeQuery = true)
     @Modifying
-    int AddListProfile(int playlistId, int songId);
+    int AddListProfile(int userId, int jobId);
 }

@@ -42,8 +42,6 @@ public class Profile {
     private String career;
     @Column(name = "salary")
     private String salary;
-    @Column(name = "job_information")
-    private String jobInformation;
     @Column(name = "phone")
     private String phone;
     @OneToOne(mappedBy = "profile")

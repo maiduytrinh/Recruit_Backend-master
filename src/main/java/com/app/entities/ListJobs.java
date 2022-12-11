@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.*;
@@ -23,7 +24,7 @@ public class ListJobs {
     @Column(name = "name")
     private String name;
     @Column(name = "salary")
-    private String salary;
+    private Long salary;
     @Column(name = "quantity")
     private Integer quantity;
     @Column(name = "sex")
@@ -42,6 +43,14 @@ public class ListJobs {
     private String workAddress;
     @Column(name = "description")
     private String description;
+    @Column(name = "status")
+    private Integer status;
+    @Column(name = "code_address")
+    private Integer codeAddress;
+    @Column(name = "date_created")
+    private LocalDate dateCreated;
+    @Column(name = "expiration_date")
+    private LocalDate dateExpiration;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_id")
     private Job job;

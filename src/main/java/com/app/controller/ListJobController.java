@@ -1,5 +1,6 @@
 package com.app.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,18 +8,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.app.dto.request.ListJobRequest;
 import com.app.dto.request.PaginationRequest;
+import com.app.dto.response.JobResponseType;
 import com.app.dto.response.ListJobResponseType;
+import com.app.entities.Job;
+import com.app.service.JobService;
 import com.app.service.ListJobService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RestController
 @RequestMapping("/api/listjobs")
 public class ListJobController {
+    private final JobService jobService;
     private final ListJobService listJobService;
     @Autowired
-    public ListJobController(ListJobService listJobService){
+    public ListJobController(ListJobService listJobService, JobService jobService){
         this.listJobService = listJobService;
+        this.jobService = jobService;
     }
 
     @PostMapping("")
@@ -59,5 +66,12 @@ public class ListJobController {
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         }
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @PostMapping("/getjobs")
+    public ResponseEntity<List<ListJobResponseType>> getListJob(@RequestBody ListJobRequest listJobRequest){
+        ResponseEntity<List<ListJobResponseType>> response = null;
+        response = new ResponseEntity<List<ListJobResponseType>>(listJobService.getJobs(listJobRequest), HttpStatus.OK);
+        return response;
     }
 }

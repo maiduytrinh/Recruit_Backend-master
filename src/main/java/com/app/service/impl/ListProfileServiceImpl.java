@@ -5,10 +5,17 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.dto.converter.ListJobConverter;
 import com.app.dto.converter.ListProfileConverter;
+import com.app.dto.request.ListProfileRequest;
+import com.app.dto.response.ListJobResponseType;
 import com.app.dto.response.ListProfileResponseType;
+import com.app.dto.response.UserResponseType;
+import com.app.entities.Job;
+import com.app.entities.ListJobs;
 import com.app.entities.ListProfiles;
 import com.app.exception.NotFoundEntityException;
+import com.app.repository.ListJobRepository;
 import com.app.repository.ListProfileReponsitory;
 import com.app.service.ListProfileService;
 import com.app.ultils.Constraints;
@@ -19,29 +26,34 @@ public class ListProfileServiceImpl implements ListProfileService{
     ListProfileConverter listProfileConverter;
     @Autowired
     ListProfileReponsitory listProfileReponsitory;
+    @Autowired
+    ListJobConverter listJobConverter;
+    @Autowired
+    ListJobRepository listJobRepository;  
 
     @Override
-    public Boolean save(ListProfileResponseType listProfileResponseType){
+    public ListProfileResponseType save(ListProfileRequest listProfileRequest){
         // TODO Auto-generated method stub
-        Boolean response = false;
-        ListProfiles listProfile = listProfileConverter.ConvertToEntity(listProfileResponseType);
+        ListProfileResponseType response = new ListProfileResponseType();
         try {
-            int Insert = listProfileReponsitory.AddListProfile(listProfile.getListProfileId().getUsers().getId(), listProfile.getListProfileId().getJobs().getId());
-            if (Insert == 1) {
-                response = true;
+            Integer isInsert = listProfileReponsitory.AddListProfile(listProfileRequest.getIdUser(), listProfileRequest.getIdJob());
+            if(isInsert == 1){
+                ListJobs listJobs = listJobRepository.getById(listProfileRequest.getIdJob());
+                response.setJobs(listJobConverter.ConvertToDTO(listJobs));
+                response.setMessage("Ứng tuyển thành công");
+                return response;
             }
         } catch (Exception e) {
+            // TODO: handle exception
         }
-        return response;
-        
-        
+        response.setMessage("Ứng tuyển không thành công");
+        return response;   
     }
 
     @Override
-    public Boolean delete(ListProfileResponseType listProfileResponseType) {
+    public Boolean delete(ListProfileRequest listProfileRequest) {
         // TODO Auto-generated method stub
-        ListProfiles listProfileDel = listProfileConverter.ConvertToEntity(listProfileResponseType);
-        int Del = listProfileReponsitory.DelListProfile(listProfileDel.getListProfileId().getUsers().getId(), listProfileDel.getListProfileId().getJobs().getId());
+        int Del = listProfileReponsitory.DelListProfile(listProfileRequest.getIdUser(), listProfileRequest.getIdUser());
         if(Del == 1){
             return true;
         }

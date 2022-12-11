@@ -17,18 +17,12 @@ public class JobConverter {
     private ModelMapper modelMapper = new ModelMapper();
     @Autowired
     ListJobConverter listJobConverter;
-    
-    public JobResponseType ConvertToBasic(Job job){
-        JobResponseType response = new JobResponseType();
-        response.setId(job.getId());
-        response.setName(job.getName());
-        return response;
-    }
 
     public JobResponseType ConvertToDTO(Job job){
         JobResponseType response = new JobResponseType();
         response.setId(job.getId());
         response.setName(job.getName());
+        response.setCountJob(job.getCountJob());
         return response;
     }
 
@@ -36,6 +30,7 @@ public class JobConverter {
         JobResponseType response = new JobResponseType();
         response.setId(job.getId());
         response.setName(job.getName());
+        response.setCountJob(job.getCountJob());
         List<ListJobResponseType> listJobResponseTypes = new ArrayList<>();
         List<ListJobs> listJobs = job.getListJobs();
         if(null != listJobs){

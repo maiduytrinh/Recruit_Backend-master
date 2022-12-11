@@ -38,6 +38,7 @@ public class JobServiceImpl implements JobService {
         // TODO Auto-generated method stub
         JobResponseType response = null;
         Job job = jobConverter.ConvertToEntity(jobResponseType);
+        job.setCountJob(0);
         Job jobSave = jobRepository.save(job);
         if (null != jobSave) {
             response = jobConverter.ConvertToDTO(jobSave);

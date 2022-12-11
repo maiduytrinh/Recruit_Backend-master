@@ -88,6 +88,9 @@ public class UserServiceImpl implements UserService{
                     user.setPasssword(bCryptPasswordEncoder.encode(user.getPasssword()));
                 }
             }
+            if(userUpdate.getJob() != null){
+                user.setJob(userUpdate.getJob());
+            }
             Profile profileUpdate = userUpdate.getProfile();
             Profile profileSave = null;
             if(profileUpdate != null){
@@ -104,7 +107,6 @@ public class UserServiceImpl implements UserService{
                         profile.setHeight(profileUpdate.getHeight());
                         profile.setHobby(profileUpdate.getHobby());
                         profile.setHomeId(profileUpdate.getHomeId());
-                        profile.setJobInformation(profileUpdate.getJobInformation());
                         profile.setPersonality(profileUpdate.getPersonality());
                         profile.setPhone(profileUpdate.getPhone());
                         profile.setSalary(profileUpdate.getSalary());
@@ -128,7 +130,7 @@ public class UserServiceImpl implements UserService{
         // TODO Auto-generated method stub
         Optional<Users> user= userRepository.findById(id);
         if (user.isPresent()){
-            return userConverter.ConvertToDTO(user.get());
+            return userConverter.ConvertToAll(user.get());
             
         }
         throw new NotFoundEntityException(Constraints.VALIDATE_NOT_FOUND);

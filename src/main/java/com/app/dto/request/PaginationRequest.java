@@ -44,7 +44,7 @@ public class PaginationRequest {
 
     public String getOrder() {
         if (order == null) {
-            return "asc";
+            return "";
         }
         return order;
     }

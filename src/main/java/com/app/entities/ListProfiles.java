@@ -17,4 +17,6 @@ import javax.persistence.*;
 public class ListProfiles {
     @EmbeddedId
     private ListProfileId listProfileId;
+    @Column(name = "status")
+    private Integer status;
 }

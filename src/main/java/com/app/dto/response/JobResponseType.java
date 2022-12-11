@@ -15,5 +15,6 @@ import lombok.Setter;
 public class JobResponseType {
     private Integer id;
     private String name;
+    private Integer countJob;
     private List<ListJobResponseType> listJobs;
 }

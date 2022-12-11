@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.app.dto.request.ListProfileRequest;
+import com.app.dto.response.ListJobResponseType;
 import com.app.dto.response.ListProfileResponseType;
 import com.app.service.ListProfileService;
 
@@ -18,17 +20,19 @@ public class ListProfileController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<HttpStatus> save(@RequestBody ListProfileResponseType listProfileResponseType) throws Exception {
-        boolean isInsert = listProfileService.save(listProfileResponseType);
-        if (isInsert) {
-            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    public ResponseEntity<ListProfileResponseType> save(@RequestBody ListProfileRequest listProfileRequest) throws Exception {
+        ListProfileResponseType responese = listProfileService.save(listProfileRequest);
+        if (responese.getJobs() != null) {
+            return new ResponseEntity<>(responese, HttpStatus.CREATED);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        
+        return new ResponseEntity<>(responese, HttpStatus.NOT_ACCEPTABLE);
     }
 
     @PostMapping("/delete")
-    public ResponseEntity<HttpStatus> delete(@RequestBody ListProfileResponseType listProfileResponseType) throws Exception {
-        boolean isDelete = listProfileService.delete(listProfileResponseType);
+    public ResponseEntity<HttpStatus> delete(@RequestBody ListProfileRequest listProfileRequest) throws Exception {
+
+        boolean isDelete = listProfileService.delete(listProfileRequest);
         if (isDelete) {
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         }

@@ -11,6 +11,8 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class ListProfileResponseType {
+    private String message;
     private UserResponseType users;
     private ListJobResponseType jobs;
+    private Integer status;
 }

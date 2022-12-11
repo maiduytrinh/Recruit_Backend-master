@@ -13,4 +13,5 @@ import com.app.entities.Company;
 public interface CompanyRepository extends JpaRepository<Company, Integer>{
     @Query(value = "SELECT A FROM Company A where (A.name like %:search% ) ")
     Page<Company> paginationCompany(Pageable pageable,@Param("search") String search);
+    
 }

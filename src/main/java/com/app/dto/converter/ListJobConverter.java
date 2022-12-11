@@ -3,14 +3,12 @@ package com.app.dto.converter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.app.dto.response.ListJobResponseType;
 import com.app.dto.response.ListProfileResponseType;
 import com.app.entities.ListJobs;
-import com.app.entities.ListProfileId;
 import com.app.entities.ListProfiles;
 
 @Component
@@ -37,6 +35,10 @@ public class ListJobConverter {
         response.setSalary(listJobs.getSalary());
         response.setSex(listJobs.getSex());
         response.setWorkAddress(listJobs.getWorkAddress());
+        response.setCodeAddress(listJobs.getCodeAddress());
+        response.setDateCreated(listJobs.getDateCreated());
+        response.setDateExpiration(listJobs.getDateExpiration());
+        response.setStatus(listJobs.getStatus());
         return response;
     }
 
@@ -54,6 +56,10 @@ public class ListJobConverter {
         response.setSalary(listJobs.getSalary());
         response.setSex(listJobs.getSex());
         response.setWorkAddress(listJobs.getWorkAddress());
+        response.setCodeAddress(listJobs.getCodeAddress());
+        response.setDateCreated(listJobs.getDateCreated());
+        response.setDateExpiration(listJobs.getDateExpiration());
+        response.setStatus(listJobs.getStatus());
         if(null != listJobs.getJob()){
             response.setJob(jobConverter.ConvertToDTO(listJobs.getJob()));
         }
@@ -77,6 +83,10 @@ public class ListJobConverter {
         response.setSalary(listJobs.getSalary());
         response.setSex(listJobs.getSex());
         response.setWorkAddress(listJobs.getWorkAddress());
+        response.setCodeAddress(listJobs.getCodeAddress());
+        response.setDateCreated(listJobs.getDateCreated());
+        response.setDateExpiration(listJobs.getDateExpiration());
+        response.setStatus(listJobs.getStatus());
         if(null != listJobs.getJob()){
             response.setJob(jobConverter.ConvertToDTO(listJobs.getJob()));
         }
@@ -110,8 +120,15 @@ public class ListJobConverter {
         listJobs.setSalary(listJobResponseType.getSalary());
         listJobs.setSex(listJobResponseType.getSex());
         listJobs.setWorkAddress(listJobResponseType.getWorkAddress());
+        listJobs.setCodeAddress(listJobResponseType.getCodeAddress());
+        listJobs.setDateCreated(listJobResponseType.getDateCreated());
+        listJobs.setDateExpiration(listJobResponseType.getDateExpiration());
+        listJobs.setStatus(listJobResponseType.getStatus());
         if(null != listJobResponseType.getJob()){
             listJobs.setJob(jobConverter.ConvertToEntity(listJobResponseType.getJob()));
+        }
+        if(null != listJobResponseType.getCompany()){
+            listJobs.setCompany(companyConverter.ConvertToEntity(listJobResponseType.getCompany()));
         }
         // ListJobs listJobs = modelMapper.map(listJobResponseType, ListJobs.class);
         return listJobs;

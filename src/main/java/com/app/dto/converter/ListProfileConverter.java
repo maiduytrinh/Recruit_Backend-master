@@ -30,15 +30,7 @@ public class ListProfileConverter {
         if(null != listJobs){
             listProfileResponseType.setJobs(listJobConverter.ConvertToDTO(listJobs));
         }
+        listProfileResponseType.setStatus(listProfiles.getStatus());
         return listProfileResponseType;
-    }
-
-    public ListProfiles ConvertToEntity(ListProfileResponseType listProfileResponseType){
-        ListProfiles listProfiles = new ListProfiles();
-        ListProfileId listProfileId = new ListProfileId();
-        listProfileId.setUsers(userConverter.convertToEntity(listProfileResponseType.getUsers()));
-        listProfileId.setJobs(listJobConverter.ConvertoEntity(listProfileResponseType.getJobs()));
-        listProfiles.setListProfileId(listProfileId);
-        return listProfiles;
     }
 }

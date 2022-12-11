@@ -24,7 +24,5 @@ public class ProfileResponseType {
     private String education;
     private String career;
     private String salary;
-    private String jobInformation;
     private String phone;
-    private UserResponseType userResponseType;
 }

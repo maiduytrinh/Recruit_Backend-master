@@ -21,6 +21,10 @@ public class Job {
     private Integer id;
     @Column(name = "job_name")
     private String name;
+    @Column(name = "count_job")
+    private Integer countJob;
     @OneToMany(mappedBy = "job")
     private List<ListJobs> listJobs;
+    @OneToMany(mappedBy = "job")
+    private List<Users> users;
 }
