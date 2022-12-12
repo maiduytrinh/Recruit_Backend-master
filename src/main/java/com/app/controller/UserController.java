@@ -65,8 +65,10 @@ public class UserController {
 
     @PostMapping("/save")
     public ResponseEntity<UserResponseType> saveUser(@RequestParam("user") String userJson,
-                                                     @RequestParam(value = "image",required = false)MultipartFile image) throws Exception {
+                                                     @RequestParam(value = "image",required = false)MultipartFile image,
+                                                    @RequestParam(value = "cv",required = false)MultipartFile cv) throws Exception {
         String imageUrl = "";
+        String cvUrl = "";
         ResponseEntity<UserResponseType> pResponse;
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
@@ -74,6 +76,10 @@ public class UserController {
         if(null != image){
             imageUrl = fileStorageService.storeFile(image);
             userResponseType.setUrlImg(Utils.getUrlFilePathImage(imageUrl));
+        }
+        if(null != cv){
+            cvUrl = fileStorageService.storeFile(cv);
+            userResponseType.setUrlCv(Utils.getUrlFilePathCv(cvUrl));
         }
         pResponse = new ResponseEntity<>( userService.save(userResponseType), HttpStatus.OK);
         return pResponse;

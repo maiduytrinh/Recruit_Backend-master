@@ -16,8 +16,8 @@ public class Utils {
     public static String getUrlFilePathImage(String fileName){
         return Constraints.PATH_UPLOAD_IMAGE + fileName;
     }
-    public static String getUrlFilePathMp3Source(String fileName){
-        return Constraints.PATH_UPLOAD_MP3 + fileName;
+    public static String getUrlFilePathCv(String fileName){
+        return Constraints.PATH_UPLOAD_CV + fileName;
     }
     public static String getFileExtension(String fullName) {
         String fileName = new File(fullName).getName();
