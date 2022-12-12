@@ -13,6 +13,7 @@ public class ProfileConverter {
     public ProfileResponseType convertToDTO(Profile profile){
         ProfileResponseType response = new ProfileResponseType();
         response.setAddress(profile.getAddress());
+        response.setCodeAddress(profile.getCodeAddress());
         response.setCCCD(profile.getCCCD());
         response.setCareer(profile.getCareer());
         response.setEducation(profile.getEducation());

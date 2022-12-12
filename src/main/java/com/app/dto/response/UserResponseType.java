@@ -22,6 +22,7 @@ public class UserResponseType {
     private String uuid;
     private String email;
     private String passsword;
+    private String urlCv;
     private JobResponseType job;
     private RoleResponseType roles;
     private ProfileResponseType profile;

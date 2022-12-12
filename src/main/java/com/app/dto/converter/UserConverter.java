@@ -32,6 +32,7 @@ public class UserConverter {
         response.setEmail(users.getEmail());
         response.setSex(users.getSex());
         response.setUrlImg(users.getUrlImg());
+        response.setUrlCv(users.getUrlCv());
         if(null != users.getRoles()){
             response.setRoles(roleConverter.ConvertToDTO(users.getRoles()));
         }
@@ -50,6 +51,7 @@ public class UserConverter {
         response.setEmail(users.getEmail());
         response.setSex(users.getSex());
         response.setUrlImg(users.getUrlImg());
+        response.setUrlCv(users.getUrlCv());
         if(null != users.getProfile()){
             response.setProfile(profileConverter.convertToDTO(users.getProfile()));
         }
@@ -71,6 +73,7 @@ public class UserConverter {
         response.setEmail(users.getEmail());
         response.setSex(users.getSex());
         response.setUrlImg(users.getUrlImg());
+        response.setUrlCv(users.getUrlCv());
         if(null != users.getProfile()){
             response.setProfile(profileConverter.convertToDTO(users.getProfile()));
         }
@@ -105,6 +108,7 @@ public class UserConverter {
         users.setEmail(userResponseType.getEmail());
         users.setSex(userResponseType.getSex());
         users.setUrlImg(userResponseType.getUrlImg());
+        users.setUrlCv(userResponseType.getUrlCv());
         users.setPasssword(userResponseType.getPasssword());
         if(null != userResponseType.getProfile()){
             users.setProfile(profileConverter.convertToEntity(userResponseType.getProfile()));

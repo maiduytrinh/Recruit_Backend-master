@@ -82,6 +82,9 @@ public class UserServiceImpl implements UserService{
 
             if(userUpdate.getUrlImg() != null)
                 user.setUrlImg(userUpdate.getUrlImg());
+
+            if(userUpdate.getUrlCv() != null)
+                user.setUrlCv(userUpdate.getUrlCv());
             
             if(userUpdate.getPasssword() != null){
                 if(bCryptPasswordEncoder.matches(userUpdate.getPasssword(),bCryptPasswordEncoder.encode(user.getPasssword()))){

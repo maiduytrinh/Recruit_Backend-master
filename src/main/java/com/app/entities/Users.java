@@ -33,6 +33,8 @@ public class Users {
     private String email;
     @Column(name = "passsword")
     private String passsword;
+    @Column(name = "url_cv")
+    private String urlCv;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     private Roles roles;

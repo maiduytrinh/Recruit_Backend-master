@@ -23,7 +23,7 @@ public class Profile {
     @Column(name = "weight")
     private Integer weight;
     @Column(name = "experence")
-    private Integer experence;
+    private String experence;
     @Column(name = "school_name")
     private String schoolName;
     @Column(name = "homeID")
@@ -36,6 +36,8 @@ public class Profile {
     private String personality;
     @Column(name = "address")
     private String address;
+    @Column(name = "code_address")
+    private Integer codeAddress;
     @Column(name = "education")
     private String education;
     @Column(name = "career")

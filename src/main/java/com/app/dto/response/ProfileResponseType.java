@@ -14,13 +14,14 @@ public class ProfileResponseType {
     private Integer id;
     private Integer height;
     private Integer weight;
-    private Integer experence;
+    private String experence;
     private String schoolName;
     private String homeId;
     private String CCCD;
     private String hobby;
     private String personality;
     private String address;
+    private Integer codeAddress;
     private String education;
     private String career;
     private String salary;
