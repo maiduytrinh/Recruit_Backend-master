@@ -74,4 +74,18 @@ public class ListJobController {
         response = new ResponseEntity<List<ListJobResponseType>>(listJobService.getJobs(listJobRequest), HttpStatus.OK);
         return response;
     }
+
+    @GetMapping("/getnew")
+    public ResponseEntity<List<ListJobResponseType>> getNew(){
+        ResponseEntity<List<ListJobResponseType>> response = null;
+        response = new ResponseEntity<List<ListJobResponseType>>(listJobService.getJobNew(), HttpStatus.OK);
+        return response;
+    }
+
+    @GetMapping("/gethot")
+    public ResponseEntity<List<ListJobResponseType>> getHot(){
+        ResponseEntity<List<ListJobResponseType>> response = null;
+        response = new ResponseEntity<List<ListJobResponseType>>(listJobService.getJobHot(), HttpStatus.OK);
+        return response;
+    }
 }

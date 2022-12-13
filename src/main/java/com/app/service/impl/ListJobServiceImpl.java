@@ -150,6 +150,34 @@ public class ListJobServiceImpl implements ListJobService{
 
         if(null != listJobs){
             listJobs.forEach(item -> {
+                ListJobResponseType listJobResponseType = listJobConverter.ConvertToDTO(item);
+                listJobResponseTypes.add(listJobResponseType);
+            });
+        }
+        return listJobResponseTypes;
+    }
+
+    @Override
+    public List<ListJobResponseType> getJobNew() {
+        // TODO Auto-generated method stub
+        List<ListJobResponseType> listJobResponseTypes = new ArrayList<>();
+        List<ListJobs> listJobs = listJobRepository.getListJobNew();
+        if(null != listJobs){
+            listJobs.forEach(item -> {
+                ListJobResponseType listJobResponseType = listJobConverter.ConvertToDTO(item);
+                listJobResponseTypes.add(listJobResponseType);
+            });
+        }
+        return listJobResponseTypes;
+    }
+
+    @Override
+    public List<ListJobResponseType> getJobHot() {
+        // TODO Auto-generated method stub
+        List<ListJobResponseType> listJobResponseTypes = new ArrayList<>();
+        List<ListJobs> listJobs = listJobRepository.getListJobHot();
+        if(null != listJobs){
+            listJobs.forEach(item -> {
                 ListJobResponseType listJobResponseType = listJobConverter.ConvertToBasic(item);
                 listJobResponseTypes.add(listJobResponseType);
             });

@@ -10,4 +10,8 @@ import com.app.dto.response.ListJobResponseType;
 public interface ListJobService extends BaseService<ListJobResponseType, Integer>{
     Map<String, Object> paginationListJob(PaginationRequest request);
     public List<ListJobResponseType> getJobs(ListJobRequest listJobRequest);
+    public List<ListJobResponseType> getJobNew();
+    public List<ListJobResponseType> getJobHot();
+
+
 }
