@@ -1,5 +1,6 @@
 package com.app.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,7 +110,15 @@ public class JobServiceImpl implements JobService {
     @Override
     public List<JobResponseType> getAll() {
         // TODO Auto-generated method stub
-        return null;
+        List<Job> jobs = jobRepository.findAll();
+        List<JobResponseType> jobResponseTypes = new ArrayList<>();
+        if(null != jobs){
+            jobs.forEach(item -> {
+                JobResponseType jobResponseType = jobConverter.ConvertToDTO(item);
+                jobResponseTypes.add(jobResponseType);
+            });
+        }
+        return jobResponseTypes;
     }
     
 }

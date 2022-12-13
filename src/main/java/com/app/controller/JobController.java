@@ -1,5 +1,6 @@
 package com.app.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,13 @@ public class JobController {
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         }
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @GetMapping("/getall")
+    public ResponseEntity<List<JobResponseType>> getall(){
+        ResponseEntity<List<JobResponseType>> response = null;
+        response = new ResponseEntity<List<JobResponseType>>(jobService.getAll(), HttpStatus.OK);
+        return response;
     }
 
 }
