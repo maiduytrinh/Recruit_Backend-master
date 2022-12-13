@@ -121,18 +121,18 @@ public class JobServiceImpl implements JobService {
         return jobResponseTypes;
     }
 
-    @Override
-    public List<JobResponseType> getJobHot() {
-        // TODO Auto-generated method stub
-        List<Job> jobs = jobRepository.getJobHot();
-        List<JobResponseType> jobResponseTypes = new ArrayList<>();
-        if(null != jobs){
-            jobs.forEach(item -> {
-                JobResponseType jobResponseType = jobConverter.ConvertToDTO(item);
-                jobResponseTypes.add(jobResponseType);
-            });
-        }
-        return jobResponseTypes;
-    }
+    // @Override
+    // public List<JobResponseType> getJobHot() {
+    //     // TODO Auto-generated method stub
+    //     // List<Job> jobs = jobRepository.getJobHot();
+    //     // List<JobResponseType> jobResponseTypes = new ArrayList<>();
+    //     // if(null != jobs){
+    //     //     jobs.forEach(item -> {
+    //     //         JobResponseType jobResponseType = jobConverter.ConvertToDTO(item);
+    //     //         jobResponseTypes.add(jobResponseType);
+    //     //     });
+    //     // }
+    //     // return jobResponseTypes;
+    // }
     
 }

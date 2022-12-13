@@ -9,5 +9,5 @@ import com.app.dto.response.JobResponseType;
 public interface JobService extends BaseService<JobResponseType, Integer>{
     Map<String, Object> paginationJob(PaginationRequest request);
 
-    List<JobResponseType> getJobHot();
+    // List<JobResponseType> getJobHot();
 }

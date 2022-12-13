@@ -23,6 +23,6 @@ public interface JobRepository extends JpaRepository<Job, Integer>{
     @Modifying
     void UpdateCountJob(@Param("count") Integer count, @Param("id") Integer id);
 
-    @Query(value = "SELECT A FROM Job A ORDER BY A.countJob DESC LIMIT 2")
-    List<Job> getJobHot();
+    // @Query(value = "SELECT A FROM Job A ORDER BY A.countJob DESC LIMIT 2")
+    // List<Job> getJobHot();
 }
