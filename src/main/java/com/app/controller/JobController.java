@@ -64,9 +64,16 @@ public class JobController {
     }
 
     @GetMapping("/getall")
-    public ResponseEntity<List<JobResponseType>> getall(){
+    public ResponseEntity<List<JobResponseType>> getAll(){
         ResponseEntity<List<JobResponseType>> response = null;
         response = new ResponseEntity<List<JobResponseType>>(jobService.getAll(), HttpStatus.OK);
+        return response;
+    }
+
+    @GetMapping("/gethot")
+    public ResponseEntity<List<JobResponseType>> getHot(){
+        ResponseEntity<List<JobResponseType>> response = null;
+        response = new ResponseEntity<List<JobResponseType>>(jobService.getJobHot(), HttpStatus.OK);
         return response;
     }
 

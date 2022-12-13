@@ -1,5 +1,7 @@
 package com.app.repository;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Page;
@@ -20,4 +22,7 @@ public interface JobRepository extends JpaRepository<Job, Integer>{
     @Query(value = "UPDATE Job J SET J.countJob = :count WHERE J.id = :id")
     @Modifying
     void UpdateCountJob(@Param("count") Integer count, @Param("id") Integer id);
+
+    @Query(value = "SELECT A FROM Job A ORDER BY A.countJob DESC LIMIT 2")
+    List<Job> getJobHot();
 }
