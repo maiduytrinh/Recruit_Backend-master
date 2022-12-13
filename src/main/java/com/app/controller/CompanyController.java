@@ -6,21 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import com.app.dto.request.PaginationRequest;
 import com.app.dto.response.CompanyResponseType;
 import com.app.service.CompanyService;
+import com.app.service.impl.FileStorageServiceImpl;
+import com.app.ultils.Utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 @RestController
 @RequestMapping("/api/company")
 public class CompanyController {
     private final CompanyService companyService;
+    private final FileStorageServiceImpl fileStorageService;
 
     @Autowired
-    public CompanyController(CompanyService companyService) {
+    public CompanyController(CompanyService companyService, FileStorageServiceImpl fileStorageService) {
         this.companyService = companyService;
+        this.fileStorageService = fileStorageService;
     }
 
     @PostMapping("")
@@ -39,10 +45,19 @@ public class CompanyController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<CompanyResponseType> save(@RequestBody CompanyResponseType companyResponseType) throws Exception {
-        CompanyResponseType response = companyService.save(companyResponseType);
-        ResponseEntity responseEntity = new ResponseEntity<>(response, HttpStatus.CREATED);
-        return responseEntity;
+    public ResponseEntity<CompanyResponseType> save(@RequestParam("company") String companyJson,
+                                                    @RequestParam(value = "image",required = false) MultipartFile image) throws Exception {
+        String imgUrl = "";
+        ResponseEntity<CompanyResponseType> pResponse;
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        CompanyResponseType companyResponseType = mapper.readValue(companyJson,CompanyResponseType.class);
+        if(null != image){
+            imgUrl = fileStorageService.storeFile(image);
+            companyResponseType.setUrlImg(Utils.getUrlFilePathImage(imgUrl));
+        }
+        pResponse = new ResponseEntity<>(companyService.save(companyResponseType), HttpStatus.CREATED);
+        return pResponse;
     }
 
     @PostMapping("/update/{id}")

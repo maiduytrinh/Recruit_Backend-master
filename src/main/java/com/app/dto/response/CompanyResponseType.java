@@ -18,5 +18,6 @@ public class CompanyResponseType {
     private String phone;
     private String email;
     private String address;
+    private String urlImg;
     private List<ListJobResponseType> jobs;
 }

@@ -25,6 +25,7 @@ public class CompanyConverter{
         response.setId(company.getId());
         response.setName(company.getName());
         response.setPhone(company.getPhone());
+        response.setUrlImg(company.getUrlImg());
         return response;
     }
 
@@ -35,6 +36,7 @@ public class CompanyConverter{
         response.setId(company.getId());
         response.setName(company.getName());
         response.setPhone(company.getPhone());
+        response.setUrlImg(company.getUrlImg());
         List<ListJobResponseType> listJobResponseTypes = new ArrayList<>();
         List<ListJobs> jobs = company.getJobs();
         if(null != jobs){

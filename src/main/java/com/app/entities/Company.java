@@ -28,6 +28,8 @@ public class Company {
     private String email;
     @Column(name = "address")
     private String address;
+    @Column(name = "url_img")
+    private String urlImg;
     @OneToMany(mappedBy = "company")
     private List<ListJobs>  jobs;
 }
