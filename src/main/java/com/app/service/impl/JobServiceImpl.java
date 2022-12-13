@@ -105,5 +105,11 @@ public class JobServiceImpl implements JobService {
         result.put("currentPage", request.getPage());
         return result;
     }
+
+    @Override
+    public List<JobResponseType> getAll() {
+        // TODO Auto-generated method stub
+        return null;
+    }
     
 }

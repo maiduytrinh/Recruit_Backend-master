@@ -1,5 +1,7 @@
 package com.app.service;
 
+import java.util.List;
+
 public interface BaseService<T, K> {
     T save(T t) throws Exception;
 
@@ -8,4 +10,6 @@ public interface BaseService<T, K> {
     T findById(K id);
 
     boolean delete(K id);
+
+    List<T> getAll();
 }

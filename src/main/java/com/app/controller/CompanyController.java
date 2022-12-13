@@ -1,5 +1,6 @@
 package com.app.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,5 +77,12 @@ public class CompanyController {
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         }
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @GetMapping("/getall")
+    public ResponseEntity<List<CompanyResponseType>> getall(){
+        ResponseEntity<List<CompanyResponseType>> response = null;
+        response = new ResponseEntity<List<CompanyResponseType>>(companyService.getAll(), HttpStatus.OK);
+        return response;
     }
 }

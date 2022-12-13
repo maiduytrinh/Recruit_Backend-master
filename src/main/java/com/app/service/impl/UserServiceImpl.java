@@ -1,5 +1,6 @@
 package com.app.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -148,6 +149,12 @@ public class UserServiceImpl implements UserService{
             return true;
         }
         throw new NotFoundEntityException(Constraints.VALIDATE_NOT_FOUND);
+    }
+
+    @Override
+    public List<UserResponseType> getAll() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

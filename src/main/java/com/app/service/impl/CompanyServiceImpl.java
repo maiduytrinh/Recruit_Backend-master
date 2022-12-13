@@ -1,5 +1,6 @@
 package com.app.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,6 +107,21 @@ public class CompanyServiceImpl implements CompanyService{
         result.put("totalElements", companyPage.getTotalElements());
         result.put("currentPage", request.getPage());
         return result;
+    }
+
+
+    @Override
+    public List<CompanyResponseType> getAll() {
+        // TODO Auto-generated method stub
+        List<Company> companies = companyRepository.findAll();
+        List<CompanyResponseType> companyResponseTypes = new ArrayList<>();
+        if(null != companies){
+            companies.forEach(item -> {
+                CompanyResponseType companyResponseType = companyConverter.ConvertToDTO(item);
+                companyResponseTypes.add(companyResponseType);
+            });
+        }
+        return companyResponseTypes;
     }
     
 }

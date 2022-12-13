@@ -183,5 +183,11 @@ public class ListJobServiceImpl implements ListJobService{
             });
         }
         return listJobResponseTypes;
+    }
+
+    @Override
+    public List<ListJobResponseType> getAll() {
+        // TODO Auto-generated method stub
+        return null;
     }    
 }

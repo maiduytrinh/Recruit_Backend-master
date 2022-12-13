@@ -1,5 +1,7 @@
 package com.app.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.app.dto.response.ProfileResponseType;
@@ -30,6 +32,12 @@ public class ProfileServiceImpl implements ProfileService{
     public boolean delete(Integer id) {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    @Override
+    public List<ProfileResponseType> getAll() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     
