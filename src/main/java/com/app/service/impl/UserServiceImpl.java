@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService{
         // TODO Auto-generated method stub
         Users user= userRepository.loadUser(email);
         if (user != null){
-            return userConverter.ConvertToDTO(user);
+            return userConverter.ConvertToAll(user);
             
         }
         throw new NotFoundEntityException(Constraints.VALIDATE_NOT_FOUND);
