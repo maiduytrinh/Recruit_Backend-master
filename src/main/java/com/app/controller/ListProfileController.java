@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.app.dto.request.ListProfileRequest;
 import com.app.dto.response.ListJobResponseType;
+import com.app.dto.response.ListProfileResponseSaveType;
 import com.app.dto.response.ListProfileResponseType;
 import com.app.service.ListProfileService;
 
@@ -20,8 +21,8 @@ public class ListProfileController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<ListProfileResponseType> save(@RequestBody ListProfileRequest listProfileRequest) throws Exception {
-        ListProfileResponseType responese = listProfileService.save(listProfileRequest);
+    public ResponseEntity<ListProfileResponseSaveType> save(@RequestBody ListProfileRequest listProfileRequest) throws Exception {
+        ListProfileResponseSaveType responese = listProfileService.save(listProfileRequest);
         if (responese.getJobs() != null) {
             return new ResponseEntity<>(responese, HttpStatus.CREATED);
         }

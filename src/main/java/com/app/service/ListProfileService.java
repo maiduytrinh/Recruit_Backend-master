@@ -1,10 +1,10 @@
 package com.app.service;
 
 import com.app.dto.request.ListProfileRequest;
-import com.app.dto.response.ListProfileResponseType;
+import com.app.dto.response.ListProfileResponseSaveType;
 
 public interface ListProfileService {
-    public ListProfileResponseType save(ListProfileRequest listProfileRequest);
+    public ListProfileResponseSaveType save(ListProfileRequest listProfileRequest);
 
     public Boolean delete(ListProfileRequest listProfileResponseType);
 }

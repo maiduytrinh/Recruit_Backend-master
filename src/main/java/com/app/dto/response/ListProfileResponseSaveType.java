@@ -11,10 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class ListProfileResponseType {
+public class ListProfileResponseSaveType {
     private String message;
-    private UserResponseType users;
-    private ListJobResponseType job;
-    private Integer status;
+    private List<ListProfileResponseType> jobs;
 }

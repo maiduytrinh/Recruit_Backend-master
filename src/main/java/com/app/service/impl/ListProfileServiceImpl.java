@@ -7,16 +7,20 @@ import org.springframework.stereotype.Service;
 
 import com.app.dto.converter.ListJobConverter;
 import com.app.dto.converter.ListProfileConverter;
+import com.app.dto.converter.UserConverter;
 import com.app.dto.request.ListProfileRequest;
 import com.app.dto.response.ListJobResponseType;
+import com.app.dto.response.ListProfileResponseSaveType;
 import com.app.dto.response.ListProfileResponseType;
 import com.app.dto.response.UserResponseType;
 import com.app.entities.Job;
 import com.app.entities.ListJobs;
 import com.app.entities.ListProfiles;
+import com.app.entities.Users;
 import com.app.exception.NotFoundEntityException;
 import com.app.repository.ListJobRepository;
 import com.app.repository.ListProfileReponsitory;
+import com.app.repository.UserRepository;
 import com.app.service.ListProfileService;
 import com.app.ultils.Constraints;
 
@@ -29,17 +33,21 @@ public class ListProfileServiceImpl implements ListProfileService{
     @Autowired
     ListJobConverter listJobConverter;
     @Autowired
-    ListJobRepository listJobRepository;  
+    ListJobRepository listJobRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    UserConverter userConverter;  
 
     @Override
-    public ListProfileResponseType save(ListProfileRequest listProfileRequest){
+    public ListProfileResponseSaveType save(ListProfileRequest listProfileRequest){
         // TODO Auto-generated method stub
-        ListProfileResponseType response = new ListProfileResponseType();
+        ListProfileResponseSaveType response = new ListProfileResponseSaveType();
         try {
             Integer isInsert = listProfileReponsitory.AddListProfile(listProfileRequest.getIdUser(), listProfileRequest.getIdJob());
             if(isInsert == 1){
-                ListJobs listJobs = listJobRepository.getById(listProfileRequest.getIdJob());
-                response.setJobs(listJobConverter.ConvertToDTO(listJobs));
+                UserResponseType userResponseType = userConverter.ConvertToAll(userRepository.getById(listProfileRequest.getIdUser()));
+                response.setJobs(userResponseType.getListJobs());
                 response.setMessage("Ứng tuyển thành công");
                 return response;
             }

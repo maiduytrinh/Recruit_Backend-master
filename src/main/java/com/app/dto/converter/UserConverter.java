@@ -88,7 +88,7 @@ public class UserConverter {
         if(null != listProfiles){
             listProfiles.forEach(item -> {
                  ListProfileResponseType listProfileResponseType = new ListProfileResponseType();
-                 listProfileResponseType.setJobs(listJobConverter.ConvertToDTO(item.getListProfileId().getJobs()));
+                 listProfileResponseType.setJob(listJobConverter.ConvertToDTO(item.getListProfileId().getJobs()));
                  listProfileResponseType.setStatus(item.getStatus());
                  listProfileResponseTypes.add(listProfileResponseType);
             });

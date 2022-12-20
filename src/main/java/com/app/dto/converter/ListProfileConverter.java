@@ -28,7 +28,7 @@ public class ListProfileConverter {
             listProfileResponseType.setUsers(userConverter.ConvertToBasic(users));
         }
         if(null != listJobs){
-            listProfileResponseType.setJobs(listJobConverter.ConvertToDTO(listJobs));
+            listProfileResponseType.setJob(listJobConverter.ConvertToDTO(listJobs));
         }
         listProfileResponseType.setStatus(listProfiles.getStatus());
         return listProfileResponseType;
