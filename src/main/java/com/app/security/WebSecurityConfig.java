@@ -1,12 +1,4 @@
 package com.app.security;
-/*******************************************************
- * For Vietnamese readers:
- *    Các bạn thân mến, mình rất vui nếu project này giúp 
- * ích được cho các bạn trong việc học tập và công việc. Nếu 
- * bạn sử dụng lại toàn bộ hoặc một phần source code xin để 
- * lại dường dẫn tới github hoặc tên tác giá.
- *    Xin cảm ơn!
- *******************************************************/
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -60,8 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                     .disable()
                 .authorizeRequests()
-                    .antMatchers("/api/users/login").permitAll();// Cho phép tất cả mọi người truy cập vào 2 địa chỉ này
-                    // .anyRequest().authenticated(); // Tất cả các request khác đều cần phải xác thực mới được truy cập
+                    .antMatchers("/api/users/login").permitAll()// Cho phép tất cả mọi người truy cập vào 2 địa chỉ này
+                    .anyRequest().authenticated(); // Tất cả các request khác đều cần phải xác thực mới được truy cập
 
         // Thêm một lớp Filter kiểm tra jwt
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
